@@ -1,0 +1,133 @@
+# NixOS Konfiguration für Anwendung innerhalb der AV Frisia
+
+{ config, pkgs, lib, ... }:
+{
+
+  # Namen festlegen  
+  system.nixos.tags = [ "Frisia" ];
+
+  # Graphische Oberfläche aktivieren
+  imports = [
+    <nixpkgs/nixos/modules/profiles/graphical.nix>
+  ];
+
+  # Dual-Boot Ermöglichen
+  boot.loader.grub.useOSProber = lib.mkDefault true;
+
+  # Bootmenue Verstecken
+  boot.loader.timeout = lib.mkDefault 0;
+  boot.loader.systemd-boot.configurationLimit = lib.mkDefault 1;
+  boot.loader.grub.configurationLimit = lib.mkDefault 1;
+
+  # Schönes Bootscreen
+  boot.plymouth = lib.mkDefault {
+    enable = true;
+    logo = pkgs.fetchurl {
+      url = "http://static.avfrisia.de/frisenzirkel_white_128.png";
+      sha256 = "098fe01b51b4b59857ac1a8c784505d1ae9cdb3c2e2b63db099d3d1b9e734f10";
+    };
+  };
+
+  # Tmpfs ist deutlich schneller und löscht temporäre Dateien beim Neustart
+  boot.tmpOnTmpfs = lib.mkDefault true;
+
+  # Automatische Updates einschalten
+  system.autoUpgrade = lib.mkDefault {
+    enable = true;
+  };
+  
+  # Automatische Optimierungen erlauben
+  nix.autoOptimiseStore = lib.mkDefault true;
+  nix.gc = lib.mkDefault {
+    automatic = true;
+    options = "-d";
+  };
+
+  # Performance-Orientierten Kernel verwenden
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
+
+  # Sicherheitsvorkehrung
+  security.hideProcessInformation = lib.mkDefault true;
+  security.sudo.wheelNeedsPassword = lib.mkDefault false;
+
+  # Nutzer festlegen
+  users.mutableUsers = lib.mkDefault false;
+
+  users.users.frise = {
+    description = "Frise";
+    isNormalUser = true;
+    hashedPassword = "";
+    extraGroups = [ "wheel" ];
+  };
+
+  # Auto-Login für den Benutzer frise
+  services.xserver.displayManager = lib.mkDefault {
+    autoLogin.enable = true;
+    autoLogin.user = "frise";
+  };
+
+  # System auf Deutsch stellen
+  i18n.defaultLocale = lib.mkDefault "de_DE.UTF8";
+  services.xserver.layout = lib.mkDefault "de";
+  console.keyMap = lib.mkDefault "de";
+
+  # Zeitzone
+  time.timeZone = lib.mkDefault "Europe/Berlin";
+
+  # Pakete, welche mitinstalliert werden
+  nixpkgs.config.allowUnfree = lib.mkDefault true;
+  environment.systemPackages = with pkgs; [
+    vim
+    spotify
+    google-chrome
+    libreoffice
+    prusa-slicer
+    openscad
+    gramps
+    texlive.combined.scheme-full
+    kile
+    imagemagick
+    vlc
+    partition-manager
+    powerdevil
+    spectacle
+    kate
+    digikam
+    ark
+    kcalc
+    okular
+    gwenview
+    skanlite
+    kdeApplications.dolphin-plugins
+  ];
+
+  # Zusätzliche Schriftarten für Büroanwendungen
+  fonts = {
+    fonts = with pkgs; [ corefonts ];
+  };
+
+  # Remote-Zugriff für Administration
+  services.openssh = lib.mkDefault {
+    enable = true;
+    startWhenNeeded = true;
+    forwardX11 = true;
+  };
+  programs.x2goserver.enable = lib.mkDefault true;
+  boot.initrd.network.ssh.enable = lib.mkDefault true;
+  services.sshguard.enable = lib.mkDefault true;
+
+  # CUPS zum mühelosen Drucken
+  services.printing.enable = lib.mkDefault true;
+
+  # Ton
+  sound.enable = lib.mkDefault true;
+  hardware.pulseaudio.enable = lib.mkDefault true;
+ 
+  # Festplatten Überwachen
+  services.smartd = lib.mkDefault {
+    enable = true;
+    notifications.x11.enable = true;
+  };
+
+  users.motd = lib.mkDefault "Allzeit Voran!";  
+}
