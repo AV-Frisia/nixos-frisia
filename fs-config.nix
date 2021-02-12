@@ -75,7 +75,7 @@
   time.timeZone = lib.mkDefault "Europe/Berlin";
 
   # Pakete, welche mitinstalliert werden
-  nixpkgs.config.allowUnfree = lib.mkDefault true;
+  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     vim
     spotify
