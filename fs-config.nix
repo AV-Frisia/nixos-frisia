@@ -58,6 +58,7 @@
     isNormalUser = true;
     hashedPassword = "";
     extraGroups = [ "wheel" ];
+    openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDRUDMUZD30eDGJ+08Q653fQB13NQSFeVMlxgGjyxzK8xRPykm8uCHGMBNrC5iR+8Lu4hhsuEeO8fGzOACqCeBSemKl/plzeroxXKWR2p+Cy0Qh1NMpMcl6Jxi0rcIdXAOUPFr38/BcmNMSrmBuuwOX1/QCQhs6G0TwyuOBJk8G9N/1R3BKMsBeRe8G5gyG6XhUtrrAKTv97BzY2IaPxNZYPFgf0EKDpA39rYpPp+CLRN0N1N+viCbX2jCMW8QRz1kjtQyzvO1v4uyhxBDq2YDvPZws8sgEBtNz5IU6ERHiec4L+j38xW/jdURFJrDgmVVlOJ2btx8Uw928sJg0tDjxwcBzcUv6QC0/ds59EPQcI8yxZUpRPCYm7hwwCGvhX/IE5lmCrSUEQ+Xj0poxOml0IbzjUxdKOPpSC75nR83OALGcSBJ+b7QQV0ZHWWd75o6NNkpIHuf2j3kjIwFBtIuQukJ2CA54A3/jkGma7M8789KeUSCZ4OBfmCfNcDlQ5n0= johannes@kirby" ];
   };
 
   # Auto-Login für den Benutzer frise
