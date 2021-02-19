@@ -84,6 +84,7 @@
     libreoffice
     prusa-slicer
     openscad
+    wineWowPackages.stable
     gramps
     texlive.combined.scheme-full
     kile
