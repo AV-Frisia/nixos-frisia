@@ -118,6 +118,9 @@
   boot.initrd.network.ssh.enable = lib.mkDefault true;
   services.sshguard.enable = lib.mkDefault true;
 
+  services.netdata.enable = true;
+  networking.firewall.allowedTCPPorts = [ 19999 ];
+
   # CUPS zum mühelosen Drucken
   services.printing.enable = lib.mkDefault true;
 
