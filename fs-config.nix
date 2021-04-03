@@ -133,6 +133,17 @@
     enable = true;
     notifications.x11.enable = true;
   };
+  
+  # Automatische Backups
+  services.restic.backups = {
+    essentials = {
+      user = "root";
+      repository = "sftp:admin@192.168.1.69:/share/Frisia/Backups";
+      paths = [ "/home" "/var" ];
+      initialize = true;
+      passwordFile = "/etc/nixos/backup";
+    };
+  };
 
   users.motd = lib.mkDefault "Allzeit Voran!";  
 }
