@@ -118,9 +118,6 @@
   boot.initrd.network.ssh.enable = lib.mkDefault true;
   services.sshguard.enable = lib.mkDefault true;
 
-  services.netdata.enable = true;
-  networking.firewall.allowedTCPPorts = [ 19999 ];
-
   # CUPS zum mühelosen Drucken
   services.printing.enable = lib.mkDefault true;
 
@@ -143,6 +140,12 @@
       initialize = true;
       passwordFile = "/etc/nixos/backup";
     };
+  };
+  
+  # Statistiken Überwachen
+  services.prometheus.exporters.node = {
+    enable = true;
+    openFirewall = true;
   };
 
   users.motd = lib.mkDefault "Allzeit Voran!";  
