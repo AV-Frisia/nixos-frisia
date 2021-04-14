@@ -35,7 +35,7 @@
   system.autoUpgrade = lib.mkDefault {
     enable = true;
   };
-  
+
   # Automatische Optimierungen erlauben
   nix.autoOptimiseStore = lib.mkDefault true;
   nix.gc = lib.mkDefault {
@@ -124,13 +124,13 @@
   # Ton
   sound.enable = lib.mkDefault true;
   hardware.pulseaudio.enable = lib.mkDefault true;
- 
+
   # Festplatten Überwachen
   services.smartd = lib.mkDefault {
     enable = true;
     notifications.x11.enable = true;
   };
-  
+
   # Automatische Backups
   services.restic.backups = {
     essentials = {
@@ -141,12 +141,12 @@
       passwordFile = "/etc/nixos/backup";
     };
   };
-  
+
   # Statistiken Überwachen
   services.prometheus.exporters.node = {
     enable = true;
     openFirewall = true;
   };
 
-  users.motd = lib.mkDefault "Allzeit Voran!";  
+  users.motd = lib.mkDefault "Allzeit Voran!";
 }
