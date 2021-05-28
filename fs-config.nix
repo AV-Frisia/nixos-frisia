@@ -28,6 +28,9 @@
     };
   };
 
+  # Auslagerrungsspeicher komprimieren -- lässt u.A. SSDs länger halten
+  zramSwap.enable = true;
+
   # Tmpfs ist deutlich schneller und löscht temporäre Dateien beim Neustart
   boot.tmpOnTmpfs = lib.mkDefault true;
 
