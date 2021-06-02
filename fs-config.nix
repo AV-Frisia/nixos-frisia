@@ -50,7 +50,6 @@
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
   # Sicherheitsvorkehrung
-  security.hideProcessInformation = lib.mkDefault true;
   security.sudo.wheelNeedsPassword = lib.mkDefault false;
 
   # Nutzer festlegen
