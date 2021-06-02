@@ -102,7 +102,6 @@
     okular
     gwenview
     skanlite
-    kdeApplications.dolphin-plugins
   ];
 
   # Zusätzliche Schriftarten für Büroanwendungen
