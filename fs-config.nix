@@ -138,6 +138,7 @@
       user = "root";
       repository = "sftp:admin@192.168.1.69:/share/Frisia/Backups";
       paths = [ "/home" "/var" ];
+      extraBackupArgs = [ "--exclude-caches" ];
       initialize = true;
       passwordFile = "/etc/nixos/backup";
     };
