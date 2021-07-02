@@ -102,6 +102,8 @@
     okular
     gwenview
     skanlite
+    zoom-us
+    kronometer
   ];
 
   # Zusätzliche Schriftarten für Büroanwendungen
