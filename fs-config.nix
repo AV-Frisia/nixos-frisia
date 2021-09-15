@@ -142,12 +142,6 @@
     };
   };
 
-  # Statistiken Überwachen
-  services.prometheus.exporters.node = {
-    enable = true;
-    openFirewall = true;
-  };
-
   users.motd = lib.mkDefault "Allzeit Voran!";
 
   nixpkgs.overlays = [
