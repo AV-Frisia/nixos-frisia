@@ -1,15 +1,12 @@
 # NixOS Konfiguration für Anwendung innerhalb der AV Frisia
 
-{ config, pkgs, lib, ... }:
-{
+{ config, pkgs, lib, ... }: {
 
   # Namen festlegen  
   system.nixos.tags = [ "Frisia" ];
 
   # Graphische Oberfläche aktivieren
-  imports = [
-    <nixpkgs/nixos/modules/profiles/graphical.nix>
-  ];
+  imports = [ <nixpkgs/nixos/modules/profiles/graphical.nix> ];
 
   # Dual-Boot Ermöglichen
   boot.loader.grub.useOSProber = lib.mkDefault true;
@@ -24,7 +21,8 @@
     enable = true;
     logo = pkgs.fetchurl {
       url = "http://static.avfrisia.de/frisenzirkel_white_128.png";
-      sha256 = "098fe01b51b4b59857ac1a8c784505d1ae9cdb3c2e2b63db099d3d1b9e734f10";
+      sha256 =
+        "098fe01b51b4b59857ac1a8c784505d1ae9cdb3c2e2b63db099d3d1b9e734f10";
     };
   };
 
@@ -35,9 +33,7 @@
   boot.tmpOnTmpfs = lib.mkDefault true;
 
   # Automatische Updates einschalten
-  system.autoUpgrade = lib.mkDefault {
-    enable = true;
-  };
+  system.autoUpgrade = lib.mkDefault { enable = true; };
 
   # Automatische Optimierungen erlauben
   nix.autoOptimiseStore = lib.mkDefault true;
@@ -60,7 +56,9 @@
     isNormalUser = true;
     hashedPassword = "";
     extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDRUDMUZD30eDGJ+08Q653fQB13NQSFeVMlxgGjyxzK8xRPykm8uCHGMBNrC5iR+8Lu4hhsuEeO8fGzOACqCeBSemKl/plzeroxXKWR2p+Cy0Qh1NMpMcl6Jxi0rcIdXAOUPFr38/BcmNMSrmBuuwOX1/QCQhs6G0TwyuOBJk8G9N/1R3BKMsBeRe8G5gyG6XhUtrrAKTv97BzY2IaPxNZYPFgf0EKDpA39rYpPp+CLRN0N1N+viCbX2jCMW8QRz1kjtQyzvO1v4uyhxBDq2YDvPZws8sgEBtNz5IU6ERHiec4L+j38xW/jdURFJrDgmVVlOJ2btx8Uw928sJg0tDjxwcBzcUv6QC0/ds59EPQcI8yxZUpRPCYm7hwwCGvhX/IE5lmCrSUEQ+Xj0poxOml0IbzjUxdKOPpSC75nR83OALGcSBJ+b7QQV0ZHWWd75o6NNkpIHuf2j3kjIwFBtIuQukJ2CA54A3/jkGma7M8789KeUSCZ4OBfmCfNcDlQ5n0= johannes@kirby" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDRUDMUZD30eDGJ+08Q653fQB13NQSFeVMlxgGjyxzK8xRPykm8uCHGMBNrC5iR+8Lu4hhsuEeO8fGzOACqCeBSemKl/plzeroxXKWR2p+Cy0Qh1NMpMcl6Jxi0rcIdXAOUPFr38/BcmNMSrmBuuwOX1/QCQhs6G0TwyuOBJk8G9N/1R3BKMsBeRe8G5gyG6XhUtrrAKTv97BzY2IaPxNZYPFgf0EKDpA39rYpPp+CLRN0N1N+viCbX2jCMW8QRz1kjtQyzvO1v4uyhxBDq2YDvPZws8sgEBtNz5IU6ERHiec4L+j38xW/jdURFJrDgmVVlOJ2btx8Uw928sJg0tDjxwcBzcUv6QC0/ds59EPQcI8yxZUpRPCYm7hwwCGvhX/IE5lmCrSUEQ+Xj0poxOml0IbzjUxdKOPpSC75nR83OALGcSBJ+b7QQV0ZHWWd75o6NNkpIHuf2j3kjIwFBtIuQukJ2CA54A3/jkGma7M8789KeUSCZ4OBfmCfNcDlQ5n0= johannes@kirby"
+    ];
   };
 
   # Auto-Login für den Benutzer frise
@@ -107,9 +105,7 @@
   ];
 
   # Zusätzliche Schriftarten für Büroanwendungen
-  fonts = {
-    fonts = with pkgs; [ corefonts ];
-  };
+  fonts = { fonts = with pkgs; [ corefonts ]; };
 
   # Remote-Zugriff für Administration
   services.openssh = lib.mkDefault {
@@ -153,4 +149,10 @@
   };
 
   users.motd = lib.mkDefault "Allzeit Voran!";
+
+  nixpkgs.overlays = [
+    (self: super: {
+      firefox = super.firefox.override { desktopName = "Feuerfux"; };
+    })
+  ];
 }
