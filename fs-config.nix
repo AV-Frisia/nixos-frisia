@@ -45,8 +45,8 @@
   # Performance-Orientierten Kernel verwenden
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
-  # Sicherheitsvorkehrung
-  security.sudo.wheelNeedsPassword = lib.mkDefault false;
+  # Security-Keys statt Passwort verwenden
+  security.pam.u2f.enable = true;
 
   # Nutzer festlegen
   users.mutableUsers = lib.mkDefault false;
@@ -128,18 +128,6 @@
   services.smartd = lib.mkDefault {
     enable = true;
     notifications.x11.enable = true;
-  };
-
-  # Automatische Backups
-  services.restic.backups = {
-    essentials = {
-      user = "root";
-      repository = "sftp:admin@192.168.1.69:/share/Frisia/Backups";
-      paths = [ "/home" "/var" ];
-      extraBackupArgs = [ "--exclude-caches" ];
-      initialize = true;
-      passwordFile = "/etc/nixos/backup";
-    };
   };
 
   users.motd = lib.mkDefault "Allzeit Voran!";
