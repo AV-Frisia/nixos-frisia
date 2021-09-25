@@ -46,7 +46,11 @@
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
   # Security-Keys statt Passwort verwenden
-  security.pam.u2f.enable = true;
+  security.pam.u2f = {
+    enable = true;
+    interactive = true;
+    cue = true;
+  };
 
   # Nutzer festlegen
   users.mutableUsers = lib.mkDefault false;
