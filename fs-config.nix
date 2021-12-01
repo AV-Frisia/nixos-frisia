@@ -117,8 +117,8 @@
     startWhenNeeded = true;
     forwardX11 = true;
   };
-  services.x2goserver.enable = lib.mkDefault true;
-  boot.initrd.network.ssh.enable = lib.mkDefault true;
+  services.x2goserver.enable = true;
+  boot.initrd.network.ssh.enable = true;
   services.sshguard.enable = lib.mkDefault true;
 
   # CUPS zum mühelosen Drucken
