@@ -117,7 +117,7 @@
     startWhenNeeded = true;
     forwardX11 = true;
   };
-  programs.x2goserver.enable = lib.mkDefault true;
+  services.x2goserver.enable = lib.mkDefault true;
   boot.initrd.network.ssh.enable = lib.mkDefault true;
   services.sshguard.enable = lib.mkDefault true;
 
