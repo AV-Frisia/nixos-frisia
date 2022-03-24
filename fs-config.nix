@@ -13,8 +13,8 @@
 
   # Bootmenue Verstecken
   boot.loader.timeout = lib.mkDefault 0;
-  boot.loader.systemd-boot.configurationLimit = lib.mkDefault 1;
-  boot.loader.grub.configurationLimit = lib.mkDefault 1;
+  boot.loader.systemd-boot.configurationLimit = lib.mkDefault 3;
+  boot.loader.grub.configurationLimit = lib.mkDefault 3;
 
   # Schönes Bootscreen
   boot.plymouth = lib.mkDefault {
