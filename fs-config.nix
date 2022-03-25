@@ -33,7 +33,10 @@
   boot.tmpOnTmpfs = lib.mkDefault true;
 
   # Automatische Updates einschalten
-  system.autoUpgrade = lib.mkDefault { enable = true; };
+  system.autoUpgrade = lib.mkDefault {
+    enable = true;
+    dates = "monthly";
+  };
 
   # Automatische Optimierungen erlauben
   nix.autoOptimiseStore = lib.mkDefault true;
