@@ -19,11 +19,7 @@
   # Schönes Bootscreen
   boot.plymouth = lib.mkDefault {
     enable = true;
-    logo = pkgs.fetchurl {
-      url = "http://static.avfrisia.de/frisenzirkel_white_128.png";
-      sha256 =
-        "098fe01b51b4b59857ac1a8c784505d1ae9cdb3c2e2b63db099d3d1b9e734f10";
-    };
+    logo = ./zirkel.png
   };
 
   # Auslagerrungsspeicher komprimieren -- lässt u.A. SSDs länger halten
