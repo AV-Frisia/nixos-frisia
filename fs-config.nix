@@ -19,7 +19,7 @@
   # Schönes Bootscreen
   boot.plymouth = lib.mkDefault {
     enable = true;
-    logo = ./zirkel.png
+    logo = ./zirkel.png;
   };
 
   # Auslagerrungsspeicher komprimieren -- lässt u.A. SSDs länger halten
